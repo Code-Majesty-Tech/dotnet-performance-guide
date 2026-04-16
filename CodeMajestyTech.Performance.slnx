@@ -13,6 +13,13 @@
         <Project
                 Path="benchmarks/01-fastendpoints-vs-minimal-vs-controllers/src/CodeMajestyTech.Performance.Post01.Shared/CodeMajestyTech.Performance.Post01.Shared.csproj"/>
     </Folder>
+    <Folder Name="/benchmarks/02-ef-core-n-plus-one/">
+        <File Path="benchmarks\02-ef-core-n-plus-one\README.md"/>
+        <Project
+                Path="benchmarks/02-ef-core-n-plus-one/benchmarks/CodeMajestyTech.Performance.Post02.Benchmarks/CodeMajestyTech.Performance.Post02.Benchmarks.csproj"/>
+        <Project
+                Path="benchmarks/02-ef-core-n-plus-one/src/CodeMajestyTech.Performance.Post02.DataAccess/CodeMajestyTech.Performance.Post02.DataAccess.csproj"/>
+    </Folder>
     <Folder Name="/shared/">
         <Project
                 Path="shared/CodeMajestyTech.Performance.Shared.BenchmarkConfig/CodeMajestyTech.Performance.Shared.BenchmarkConfig.csproj"/>

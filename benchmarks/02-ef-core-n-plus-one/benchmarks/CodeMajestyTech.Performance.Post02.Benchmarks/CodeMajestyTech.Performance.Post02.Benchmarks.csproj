@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="BenchmarkDotNet"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="../../../../shared/CodeMajestyTech.Performance.Shared.BenchmarkConfig/CodeMajestyTech.Performance.Shared.BenchmarkConfig.csproj"/>
+        <ProjectReference Include="../../../../shared/CodeMajestyTech.Performance.Shared.TestContainers/CodeMajestyTech.Performance.Shared.TestContainers.csproj"/>
+        <ProjectReference Include="../../src/CodeMajestyTech.Performance.Post02.DataAccess/CodeMajestyTech.Performance.Post02.DataAccess.csproj"/>
+    </ItemGroup>
+</Project>
