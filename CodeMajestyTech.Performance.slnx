@@ -1,12 +1,28 @@
 <Solution>
-  <Folder Name="/shared/">
-    <Project Path="shared/CodeMajestyTech.Performance.Shared.BenchmarkConfig/CodeMajestyTech.Performance.Shared.BenchmarkConfig.csproj" />
-    <Project Path="shared/CodeMajestyTech.Performance.Shared.TestContainers/CodeMajestyTech.Performance.Shared.TestContainers.csproj" />
-  </Folder>
-  <Folder Name="/SolutionItems/">
-    <File Path="Directory.Build.props" />
-    <File Path="Directory.Packages.props" />
-    <File Path="global.json" />
-    <File Path="README.md" />
-  </Folder>
+    <Folder Name="/benchmarks/"/>
+    <Folder Name="/benchmarks/01-fastendpoints-vs-minimal-vs-controllers/">
+        <File Path="benchmarks\01-fastendpoints-vs-minimal-vs-controllers\README.md"/>
+        <Project
+                Path="benchmarks/01-fastendpoints-vs-minimal-vs-controllers/benchmarks/CodeMajestyTech.Performance.Post01.Benchmarks/CodeMajestyTech.Performance.Post01.Benchmarks.csproj"/>
+        <Project
+                Path="benchmarks/01-fastendpoints-vs-minimal-vs-controllers/src/CodeMajestyTech.Performance.Post01.Api.Controllers/CodeMajestyTech.Performance.Post01.Api.Controllers.csproj"/>
+        <Project
+                Path="benchmarks/01-fastendpoints-vs-minimal-vs-controllers/src/CodeMajestyTech.Performance.Post01.Api.FastEndpoints/CodeMajestyTech.Performance.Post01.Api.FastEndpoints.csproj"/>
+        <Project
+                Path="benchmarks/01-fastendpoints-vs-minimal-vs-controllers/src/CodeMajestyTech.Performance.Post01.Api.MinimalApi/CodeMajestyTech.Performance.Post01.Api.MinimalApi.csproj"/>
+        <Project
+                Path="benchmarks/01-fastendpoints-vs-minimal-vs-controllers/src/CodeMajestyTech.Performance.Post01.Shared/CodeMajestyTech.Performance.Post01.Shared.csproj"/>
+    </Folder>
+    <Folder Name="/shared/">
+        <Project
+                Path="shared/CodeMajestyTech.Performance.Shared.BenchmarkConfig/CodeMajestyTech.Performance.Shared.BenchmarkConfig.csproj"/>
+        <Project
+                Path="shared/CodeMajestyTech.Performance.Shared.TestContainers/CodeMajestyTech.Performance.Shared.TestContainers.csproj"/>
+    </Folder>
+    <Folder Name="/SolutionItems/">
+        <File Path="Directory.Build.props"/>
+        <File Path="Directory.Packages.props"/>
+        <File Path="global.json"/>
+        <File Path="README.md"/>
+    </Folder>
 </Solution>

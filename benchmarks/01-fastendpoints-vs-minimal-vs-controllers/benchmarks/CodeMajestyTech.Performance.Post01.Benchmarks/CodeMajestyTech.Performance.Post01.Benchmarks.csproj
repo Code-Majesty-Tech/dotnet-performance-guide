@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="BenchmarkDotNet"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="../../../../shared/CodeMajestyTech.Performance.Shared.BenchmarkConfig/CodeMajestyTech.Performance.Shared.BenchmarkConfig.csproj"/>
+        <ProjectReference Include="../../../../shared/CodeMajestyTech.Performance.Shared.TestContainers/CodeMajestyTech.Performance.Shared.TestContainers.csproj"/>
+        <ProjectReference Include="../../src/CodeMajestyTech.Performance.Post01.Shared/CodeMajestyTech.Performance.Post01.Shared.csproj"/>
+        <ProjectReference Include="../../src/CodeMajestyTech.Performance.Post01.Api.FastEndpoints/CodeMajestyTech.Performance.Post01.Api.FastEndpoints.csproj"/>
+        <ProjectReference Include="../../src/CodeMajestyTech.Performance.Post01.Api.MinimalApi/CodeMajestyTech.Performance.Post01.Api.MinimalApi.csproj"/>
+        <ProjectReference Include="../../src/CodeMajestyTech.Performance.Post01.Api.Controllers/CodeMajestyTech.Performance.Post01.Api.Controllers.csproj"/>
+    </ItemGroup>
+</Project>

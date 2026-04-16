@@ -6,22 +6,24 @@ using DotNet.Testcontainers.Networks;
 namespace CodeMajestyTech.Performance.Shared.TestContainers;
 
 /// <summary>
-/// Boots a PgBouncer connection-pooler container in front of an
-/// existing <see cref="PostgresFixture"/>. Use from <c>[GlobalSetup]</c>
-/// and dispose in <c>[GlobalCleanup]</c>.
-///
-/// Because PgBouncer needs to talk to Postgres over container networking
-/// (not through the host), this fixture creates a shared Docker network
-/// that both containers attach to. Callers should start the Postgres
-/// fixture first via <see cref="PostgresFixture.StartAsync"/> overload
-/// that accepts a configure callback — then pass the same network here.
-///
-/// For the typical case, prefer the high-level helper
-/// <see cref="StartWithPostgresAsync"/> which handles network creation
-/// for both containers in one call.
+///     Boots a PgBouncer connection-pooler container in front of an
+///     existing <see cref="PostgresFixture" />. Use from <c>[GlobalSetup]</c>
+///     and dispose in <c>[GlobalCleanup]</c>.
+///     Because PgBouncer needs to talk to Postgres over container networking
+///     (not through the host), this fixture creates a shared Docker network
+///     that both containers attach to. Callers should start the Postgres
+///     fixture first via <see cref="PostgresFixture.StartAsync" /> overload
+///     that accepts a configure callback — then pass the same network here.
+///     For the typical case, prefer the high-level helper
+///     <see cref="StartWithPostgresAsync" /> which handles network creation
+///     for both containers in one call.
 /// </summary>
 public sealed class PgBouncerFixture : IAsyncDisposable
 {
+    public const ushort PgBouncerPort = 5432;
+    public const string Username = PostgresFixture.Username;
+    public const string Password = PostgresFixture.Password;
+    public const string Database = PostgresFixture.Database;
     private readonly IContainer _container;
     private readonly INetwork? _ownedNetwork;
     private readonly PostgresFixture? _ownedPostgres;
@@ -37,23 +39,25 @@ public sealed class PgBouncerFixture : IAsyncDisposable
     }
 
     /// <summary>
-    /// Npgsql-compatible connection string pointing at PgBouncer. Use
-    /// this in place of the underlying Postgres connection string when
-    /// benchmarking the pooler.
+    ///     Npgsql-compatible connection string pointing at PgBouncer. Use
+    ///     this in place of the underlying Postgres connection string when
+    ///     benchmarking the pooler.
     /// </summary>
     public string ConnectionString { get; private set; } = string.Empty;
 
     public ushort MappedPort => _container.GetMappedPublicPort(PgBouncerPort);
 
-    public const ushort PgBouncerPort = 5432;
-    public const string Username = PostgresFixture.Username;
-    public const string Password = PostgresFixture.Password;
-    public const string Database = PostgresFixture.Database;
+    public async ValueTask DisposeAsync()
+    {
+        await _container.DisposeAsync().ConfigureAwait(false);
+        if (_ownedPostgres is not null) await _ownedPostgres.DisposeAsync().ConfigureAwait(false);
+        if (_ownedNetwork is not null) await _ownedNetwork.DisposeAsync().ConfigureAwait(false);
+    }
 
     /// <summary>
-    /// One-call helper that creates a Docker network, starts Postgres
-    /// on it, then starts PgBouncer in front of Postgres. The returned
-    /// fixture owns the Postgres container and will dispose it too.
+    ///     One-call helper that creates a Docker network, starts Postgres
+    ///     on it, then starts PgBouncer in front of Postgres. The returned
+    ///     fixture owns the Postgres container and will dispose it too.
     /// </summary>
     public static async Task<PgBouncerFixture> StartWithPostgresAsync(
         PoolMode poolMode = PoolMode.Transaction,
@@ -81,18 +85,18 @@ public sealed class PgBouncerFixture : IAsyncDisposable
             poolMode,
             maxClientConnections,
             defaultPoolSize,
-            ownedNetwork: network,
-            ownedPostgres: postgres,
+            network,
+            postgres,
             cancellationToken).ConfigureAwait(false);
 
         return pgBouncer;
     }
 
     /// <summary>
-    /// Starts PgBouncer in front of an externally-owned Postgres
-    /// container attached to <paramref name="network"/>. The caller
-    /// remains responsible for disposing the Postgres container and
-    /// the network.
+    ///     Starts PgBouncer in front of an externally-owned Postgres
+    ///     container attached to <paramref name="network" />. The caller
+    ///     remains responsible for disposing the Postgres container and
+    ///     the network.
     /// </summary>
     public static Task<PgBouncerFixture> StartAsync(
         INetwork network,
@@ -101,15 +105,17 @@ public sealed class PgBouncerFixture : IAsyncDisposable
         int maxClientConnections = 1000,
         int defaultPoolSize = 25,
         CancellationToken cancellationToken = default)
-        => BuildPgBouncerAsync(
+    {
+        return BuildPgBouncerAsync(
             network,
             postgresNetworkAlias,
             poolMode,
             maxClientConnections,
             defaultPoolSize,
-            ownedNetwork: null,
-            ownedPostgres: null,
+            null,
+            null,
             cancellationToken);
+    }
 
     private static async Task<PgBouncerFixture> BuildPgBouncerAsync(
         INetwork network,
@@ -134,7 +140,7 @@ public sealed class PgBouncerFixture : IAsyncDisposable
             .WithEnvironment("DEFAULT_POOL_SIZE", defaultPoolSize.ToString())
             .WithEnvironment("ADMIN_USERS", Username)
             .WithEnvironment("AUTH_TYPE", "scram-sha-256")
-            .WithPortBinding(PgBouncerPort, assignRandomHostPort: true)
+            .WithPortBinding(PgBouncerPort, true)
             .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(PgBouncerPort))
             .Build();
 
@@ -145,50 +151,40 @@ public sealed class PgBouncerFixture : IAsyncDisposable
         var mappedPort = container.GetMappedPublicPort(PgBouncerPort);
         var builder = new StringBuilder();
         builder.Append("Host=").Append(container.Hostname)
-               .Append(";Port=").Append(mappedPort)
-               .Append(";Username=").Append(Username)
-               .Append(";Password=").Append(Password)
-               .Append(";Database=").Append(Database)
-               .Append(";Pooling=false");
+            .Append(";Port=").Append(mappedPort)
+            .Append(";Username=").Append(Username)
+            .Append(";Password=").Append(Password)
+            .Append(";Database=").Append(Database)
+            .Append(";Pooling=false");
         fixture.ConnectionString = builder.ToString();
 
         return fixture;
     }
-
-    public async ValueTask DisposeAsync()
-    {
-        await _container.DisposeAsync().ConfigureAwait(false);
-        if (_ownedPostgres is not null)
-        {
-            await _ownedPostgres.DisposeAsync().ConfigureAwait(false);
-        }
-        if (_ownedNetwork is not null)
-        {
-            await _ownedNetwork.DisposeAsync().ConfigureAwait(false);
-        }
-    }
 }
 
 /// <summary>
-/// PgBouncer pool modes. Transaction mode is the standard choice for
-/// ASP.NET Core APIs running short transactions; Session mode behaves
-/// like a traditional connection pool and is required for features
-/// that rely on session state (e.g. LISTEN/NOTIFY, prepared statements).
+///     PgBouncer pool modes. Transaction mode is the standard choice for
+///     ASP.NET Core APIs running short transactions; Session mode behaves
+///     like a traditional connection pool and is required for features
+///     that rely on session state (e.g. LISTEN/NOTIFY, prepared statements).
 /// </summary>
 public enum PoolMode
 {
     Transaction,
     Session,
-    Statement,
+    Statement
 }
 
 internal static class PoolModeExtensions
 {
-    public static string ToPgBouncerString(this PoolMode mode) => mode switch
+    public static string ToPgBouncerString(this PoolMode mode)
     {
-        PoolMode.Transaction => "transaction",
-        PoolMode.Session => "session",
-        PoolMode.Statement => "statement",
-        _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, "Unknown PgBouncer pool mode."),
-    };
+        return mode switch
+        {
+            PoolMode.Transaction => "transaction",
+            PoolMode.Session => "session",
+            PoolMode.Statement => "statement",
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, "Unknown PgBouncer pool mode.")
+        };
+    }
 }

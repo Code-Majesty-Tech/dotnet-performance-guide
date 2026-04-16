@@ -3,16 +3,17 @@ using Testcontainers.RabbitMq;
 namespace CodeMajestyTech.Performance.Shared.TestContainers;
 
 /// <summary>
-/// Boots a RabbitMQ container (with management plugin) for a benchmark
-/// class. Use from <c>[GlobalSetup]</c> and dispose in
-/// <c>[GlobalCleanup]</c>.
-///
-/// The management plugin is included because MassTransit's health checks
-/// and a number of tuning benchmarks read queue statistics from the
-/// management API.
+///     Boots a RabbitMQ container (with management plugin) for a benchmark
+///     class. Use from <c>[GlobalSetup]</c> and dispose in
+///     <c>[GlobalCleanup]</c>.
+///     The management plugin is included because MassTransit's health checks
+///     and a number of tuning benchmarks read queue statistics from the
+///     management API.
 /// </summary>
 public sealed class RabbitMqFixture : IAsyncDisposable
 {
+    public const string Username = "benchmark";
+    public const string Password = "benchmark";
     private readonly RabbitMqContainer _container;
 
     private RabbitMqFixture(RabbitMqContainer container)
@@ -21,7 +22,7 @@ public sealed class RabbitMqFixture : IAsyncDisposable
     }
 
     /// <summary>
-    /// AMQP URI for clients such as MassTransit or RabbitMQ.Client.
+    ///     AMQP URI for clients such as MassTransit or RabbitMQ.Client.
     /// </summary>
     public string ConnectionString => _container.GetConnectionString();
 
@@ -29,15 +30,17 @@ public sealed class RabbitMqFixture : IAsyncDisposable
 
     public string Hostname => _container.Hostname;
 
-    public const string Username = "benchmark";
-    public const string Password = "benchmark";
+    public async ValueTask DisposeAsync()
+    {
+        await _container.DisposeAsync().ConfigureAwait(false);
+    }
 
     /// <summary>
-    /// Starts a new RabbitMQ container and returns once the broker is ready.
+    ///     Starts a new RabbitMQ container and returns once the broker is ready.
     /// </summary>
     /// <param name="configure">
-    /// Optional callback for benchmark-specific container configuration
-    /// (e.g. enabling additional plugins, adjusting memory high watermark).
+    ///     Optional callback for benchmark-specific container configuration
+    ///     (e.g. enabling additional plugins, adjusting memory high watermark).
     /// </param>
     public static async Task<RabbitMqFixture> StartAsync(
         Action<RabbitMqBuilder>? configure = null,
@@ -53,10 +56,5 @@ public sealed class RabbitMqFixture : IAsyncDisposable
         var container = builder.Build();
         await container.StartAsync(cancellationToken).ConfigureAwait(false);
         return new RabbitMqFixture(container);
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await _container.DisposeAsync().ConfigureAwait(false);
     }
 }

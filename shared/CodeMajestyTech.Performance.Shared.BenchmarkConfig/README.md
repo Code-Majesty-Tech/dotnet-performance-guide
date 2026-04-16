@@ -1,14 +1,15 @@
 # CodeMajestyTech.Performance.Shared.BenchmarkConfig
 
-Shared BenchmarkDotNet configuration used across every benchmark project in this repository. Three profiles are provided — pick the one that matches your goal.
+Shared BenchmarkDotNet configuration used across every benchmark project in this repository. Three profiles are
+provided — pick the one that matches your goal.
 
 ## Profiles
 
-| Config | Job | Use case | Approx. time |
-|--------|-----|----------|--------------|
-| `QuickConfig` | `ShortRun` (3 warmup, 5 iter) | Dev iteration — fast feedback while authoring a benchmark | ~30s per benchmark |
-| `DefaultConfig` | `Default` (10 warmup, 15 iter) | Blog-post numbers — the standard for published results | ~2-5 min per class |
-| `FullConfig` | `LongRun` | Headline charts, high-stakes comparisons, reproducibility claims | 10+ min per class |
+| Config          | Job                            | Use case                                                         | Approx. time       |
+|-----------------|--------------------------------|------------------------------------------------------------------|--------------------|
+| `QuickConfig`   | `ShortRun` (3 warmup, 5 iter)  | Dev iteration — fast feedback while authoring a benchmark        | ~30s per benchmark |
+| `DefaultConfig` | `Default` (10 warmup, 15 iter) | Blog-post numbers — the standard for published results           | ~2-5 min per class |
+| `FullConfig`    | `LongRun`                      | Headline charts, high-stakes comparisons, reproducibility claims | 10+ min per class  |
 
 All three profiles include:
 
@@ -16,7 +17,8 @@ All three profiles include:
 - Markdown / JSON / CSV exporters (Markdown output goes straight into blog posts)
 - Statistical test column using Mann-Whitney U
 
-`FullConfig` additionally enables `ThreadingDiagnoser` (lock contention, completed work items) and shows P-values for the statistical tests.
+`FullConfig` additionally enables `ThreadingDiagnoser` (lock contention, completed work items) and shows P-values for
+the statistical tests.
 
 ## Usage
 
@@ -51,11 +53,14 @@ dotnet run -c Release -- --job default     # maps to DefaultConfig-style
 dotnet run -c Release -- --job long        # maps to FullConfig-style
 ```
 
-Using the `[Config(typeof(...))]` attribute is preferred because it locks the benchmark class to a specific rigor level and makes blog-post reproducibility explicit.
+Using the `[Config(typeof(...))]` attribute is preferred because it locks the benchmark class to a specific rigor level
+and makes blog-post reproducibility explicit.
 
 ## Why three profiles?
 
-Benchmark-driven content has a conflict: **fast feedback while authoring** and **statistically rigorous numbers for publication** are opposing goals. Having three named profiles makes the tradeoff explicit rather than fiddling with `WithIterationCount` values each time.
+Benchmark-driven content has a conflict: **fast feedback while authoring** and **statistically rigorous numbers for
+publication** are opposing goals. Having three named profiles makes the tradeoff explicit rather than fiddling with
+`WithIterationCount` values each time.
 
 When drafting a benchmark: `QuickConfig`.
 When recording numbers for a post: `DefaultConfig`.

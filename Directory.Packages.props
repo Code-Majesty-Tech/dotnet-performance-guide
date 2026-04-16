@@ -1,148 +1,148 @@
 <Project>
-  <!--
-      Central Package Management for the Code Majesty Tech .NET Performance Guide.
-      All package versions live here; individual .csproj files reference
-      packages by name only (no Version attribute).
-  
-      Grouped by the benchmark post(s) that depend on them. If you add a new
-      package, put it in the right group so the file stays navigable.
-    -->
-  <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-  </PropertyGroup>
+    <!--
+        Central Package Management for the Code Majesty Tech .NET Performance Guide.
+        All package versions live here; individual .csproj files reference
+        packages by name only (no Version attribute).
+    
+        Grouped by the benchmark post(s) that depend on them. If you add a new
+        package, put it in the right group so the file stays navigable.
+      -->
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    </PropertyGroup>
 
-  <!-- =====================================================================
-       Core .NET 10 runtime & framework
-       Used by: all projects
-       ===================================================================== -->
-  <ItemGroup Label="Microsoft.Extensions.*">
-    <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Caching.Hybrid" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.0" />
-  </ItemGroup>
+    <!-- =====================================================================
+         Core .NET 10 runtime & framework
+         Used by: all projects
+         ===================================================================== -->
+    <ItemGroup Label="Microsoft.Extensions.*">
+        <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Caching.Hybrid" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.0"/>
+    </ItemGroup>
 
-  <!-- =====================================================================
-       BenchmarkDotNet — used by every benchmark project
-       ===================================================================== -->
-  <ItemGroup Label="BenchmarkDotNet">
-    <PackageVersion Include="BenchmarkDotNet" Version="0.15.4" />
-    <PackageVersion Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.15.4" />
-  </ItemGroup>
+    <!-- =====================================================================
+         BenchmarkDotNet — used by every benchmark project
+         ===================================================================== -->
+    <ItemGroup Label="BenchmarkDotNet">
+        <PackageVersion Include="BenchmarkDotNet" Version="0.15.4"/>
+        <PackageVersion Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.15.4"/>
+    </ItemGroup>
 
-  <!-- =====================================================================
-       Testcontainers — used by every benchmark project
-       Modular packages: one per service type.
-       ===================================================================== -->
-  <ItemGroup Label="Testcontainers">
-    <PackageVersion Include="Testcontainers" Version="4.6.0" />
-    <PackageVersion Include="Testcontainers.PostgreSql" Version="4.6.0" />
-    <PackageVersion Include="Testcontainers.Redis" Version="4.6.0" />
-    <PackageVersion Include="Testcontainers.RabbitMq" Version="4.6.0" />
-  </ItemGroup>
+    <!-- =====================================================================
+         Testcontainers — used by every benchmark project
+         Modular packages: one per service type.
+         ===================================================================== -->
+    <ItemGroup Label="Testcontainers">
+        <PackageVersion Include="Testcontainers" Version="4.6.0"/>
+        <PackageVersion Include="Testcontainers.PostgreSql" Version="4.6.0"/>
+        <PackageVersion Include="Testcontainers.Redis" Version="4.6.0"/>
+        <PackageVersion Include="Testcontainers.RabbitMq" Version="4.6.0"/>
+    </ItemGroup>
 
-  <!-- =====================================================================
-       ASP.NET Core API frameworks
-       Post 1: FastEndpoints vs Minimal API vs Controllers
-       Post 8: Native AOT vs JIT
-       Post 9: Output Caching
-       ===================================================================== -->
-  <ItemGroup Label="ASP.NET Core &amp; API frameworks">
-    <PackageVersion Include="FastEndpoints" Version="6.2.0" />
-    <PackageVersion Include="FastEndpoints.Swagger" Version="6.2.0" />
-    <PackageVersion Include="FluentValidation" Version="11.11.0" />
-    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.0" />
-  </ItemGroup>
+    <!-- =====================================================================
+         ASP.NET Core API frameworks
+         Post 1: FastEndpoints vs Minimal API vs Controllers
+         Post 8: Native AOT vs JIT
+         Post 9: Output Caching
+         ===================================================================== -->
+    <ItemGroup Label="ASP.NET Core &amp; API frameworks">
+        <PackageVersion Include="FastEndpoints" Version="6.2.0"/>
+        <PackageVersion Include="FastEndpoints.Swagger" Version="6.2.0"/>
+        <PackageVersion Include="FluentValidation" Version="12.0.0"/>
+        <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0"/>
+        <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.0"/>
+    </ItemGroup>
 
-  <!-- =====================================================================
-       Entity Framework Core + PostgreSQL
-       Posts: 2, 5, 9, 10
-       ===================================================================== -->
-  <ItemGroup Label="EF Core + PostgreSQL">
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.0" />
-    <!-- Npgsql provider — keep aligned with EF Core 10 -->
-    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
-    <PackageVersion Include="Npgsql" Version="10.0.0" />
-    <!-- Dapper for Post 5 -->
-    <PackageVersion Include="Dapper" Version="2.1.66" />
-  </ItemGroup>
+    <!-- =====================================================================
+         Entity Framework Core + PostgreSQL
+         Posts: 2, 5, 9, 10
+         ===================================================================== -->
+    <ItemGroup Label="EF Core + PostgreSQL">
+        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.0"/>
+        <!-- Npgsql provider — keep aligned with EF Core 10 -->
+        <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0"/>
+        <PackageVersion Include="Npgsql" Version="10.0.0"/>
+        <!-- Dapper for Post 5 -->
+        <PackageVersion Include="Dapper" Version="2.1.66"/>
+    </ItemGroup>
 
-  <!-- =====================================================================
-       Redis
-       Post 3: HybridCache, Post 9: Output Caching
-       StackExchange.Redis is the underlying client used by Microsoft's
-       caching abstractions.
-       ===================================================================== -->
-  <ItemGroup Label="Redis">
-    <PackageVersion Include="StackExchange.Redis" Version="2.8.22" />
-  </ItemGroup>
+    <!-- =====================================================================
+         Redis
+         Post 3: HybridCache, Post 9: Output Caching
+         StackExchange.Redis is the underlying client used by Microsoft's
+         caching abstractions.
+         ===================================================================== -->
+    <ItemGroup Label="Redis">
+        <PackageVersion Include="StackExchange.Redis" Version="2.8.22"/>
+    </ItemGroup>
 
-  <!-- =====================================================================
-       Messaging — Post 7: MassTransit + RabbitMQ
-       ===================================================================== -->
-  <ItemGroup Label="MassTransit">
-    <PackageVersion Include="MassTransit" Version="8.3.4" />
-    <PackageVersion Include="MassTransit.RabbitMQ" Version="8.3.4" />
-    <!-- Verify licensing terms for MassTransit 9.x before upgrading. -->
-  </ItemGroup>
+    <!-- =====================================================================
+         Messaging — Post 7: MassTransit + RabbitMQ
+         ===================================================================== -->
+    <ItemGroup Label="MassTransit">
+        <PackageVersion Include="MassTransit" Version="8.3.4"/>
+        <PackageVersion Include="MassTransit.RabbitMQ" Version="8.3.4"/>
+        <!-- Verify licensing terms for MassTransit 9.x before upgrading. -->
+    </ItemGroup>
 
-  <!-- =====================================================================
-       Serialization
-       Post 4: System.Text.Json vs Newtonsoft.Json
-       Post 7: MassTransit MessagePack comparison
-       ===================================================================== -->
-  <ItemGroup Label="Serialization">
-    <PackageVersion Include="System.Text.Json" Version="10.0.0" />
-    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageVersion Include="MessagePack" Version="3.1.0" />
-  </ItemGroup>
+    <!-- =====================================================================
+         Serialization
+         Post 4: System.Text.Json vs Newtonsoft.Json
+         Post 7: MassTransit MessagePack comparison
+         ===================================================================== -->
+    <ItemGroup Label="Serialization">
+        <PackageVersion Include="System.Text.Json" Version="10.0.0"/>
+        <PackageVersion Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageVersion Include="MessagePack" Version="3.1.0"/>
+    </ItemGroup>
 
-  <!-- =====================================================================
-       Blazor — Post 6
-       These versions ship with the .NET 10 SDK; keep aligned with runtime.
-       ===================================================================== -->
-  <ItemGroup Label="Blazor">
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0" />
-    <!-- AntDesign Blazor — Code Majesty's default UI kit -->
-    <PackageVersion Include="AntDesign" Version="1.3.0" />
-  </ItemGroup>
+    <!-- =====================================================================
+         Blazor — Post 6
+         These versions ship with the .NET 10 SDK; keep aligned with runtime.
+         ===================================================================== -->
+    <ItemGroup Label="Blazor">
+        <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.0"/>
+        <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0"/>
+        <!-- AntDesign Blazor — Code Majesty's default UI kit -->
+        <PackageVersion Include="AntDesign" Version="1.3.0"/>
+    </ItemGroup>
 
-  <!-- =====================================================================
-       Browser automation & load testing — Post 6 (Blazor benchmarks)
-       BenchmarkDotNet alone cannot measure browser-side rendering,
-       so Playwright drives the real browser.
-       ===================================================================== -->
-  <ItemGroup Label="Browser automation">
-    <PackageVersion Include="Microsoft.Playwright" Version="1.49.0" />
-    <PackageVersion Include="NBomber" Version="6.0.1" />
-    <PackageVersion Include="NBomber.Http" Version="6.0.0" />
-  </ItemGroup>
+    <!-- =====================================================================
+         Browser automation & load testing — Post 6 (Blazor benchmarks)
+         BenchmarkDotNet alone cannot measure browser-side rendering,
+         so Playwright drives the real browser.
+         ===================================================================== -->
+    <ItemGroup Label="Browser automation">
+        <PackageVersion Include="Microsoft.Playwright" Version="1.49.0"/>
+        <PackageVersion Include="NBomber" Version="6.0.1"/>
+        <PackageVersion Include="NBomber.Http" Version="6.0.0"/>
+    </ItemGroup>
 
-  <!-- =====================================================================
-       Logging / diagnostics — optional but useful for benchmark
-       observability during authoring.
-       ===================================================================== -->
-  <ItemGroup Label="Diagnostics">
-    <PackageVersion Include="Serilog" Version="4.2.0" />
-    <PackageVersion Include="Serilog.Extensions.Hosting" Version="9.0.0" />
-    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
-  </ItemGroup>
+    <!-- =====================================================================
+         Logging / diagnostics — optional but useful for benchmark
+         observability during authoring.
+         ===================================================================== -->
+    <ItemGroup Label="Diagnostics">
+        <PackageVersion Include="Serilog" Version="4.2.0"/>
+        <PackageVersion Include="Serilog.Extensions.Hosting" Version="9.0.0"/>
+        <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0"/>
+    </ItemGroup>
 
 </Project>

@@ -1,10 +1,10 @@
 namespace CodeMajestyTech.Performance.Shared.TestContainers;
 
 /// <summary>
-/// Pinned container image versions used across every benchmark.
-/// Bump versions deliberately — benchmark numbers are only meaningful
-/// against known container versions. When you bump any image here,
-/// re-run affected benchmarks and record new numbers in /results.
+///     Pinned container image versions used across every benchmark.
+///     Bump versions deliberately — benchmark numbers are only meaningful
+///     against known container versions. When you bump any image here,
+///     re-run affected benchmarks and record new numbers in /results.
 /// </summary>
 public static class ContainerImages
 {
