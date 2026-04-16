@@ -1,0 +1,39 @@
+<Project>
+
+    <PropertyGroup Label="Target framework and language">
+        <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <WarningsAsErrors />
+        <AnalysisLevel>latest</AnalysisLevel>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Compiler settings">
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);CS1591</NoWarn>
+        <DebugType>portable</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Assembly metadata">
+        <Company>Code Majesty Tech</Company>
+        <Authors>Code Majesty Tech</Authors>
+        <Product>CodeMajestyTech.Performance</Product>
+        <Copyright>Copyright © Code Majesty Tech $([System.DateTime]::Now.Year)</Copyright>
+        <NeutralLanguage>en-US</NeutralLanguage>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Central package management">
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Deterministic builds">
+        <Deterministic>true</Deterministic>
+        <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
+</Project>

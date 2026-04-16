@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/shared/">
+    <Project Path="shared/CodeMajestyTech.Performance.Shared.BenchmarkConfig/CodeMajestyTech.Performance.Shared.BenchmarkConfig.csproj" />
+    <Project Path="shared/CodeMajestyTech.Performance.Shared.TestContainers/CodeMajestyTech.Performance.Shared.TestContainers.csproj" />
+  </Folder>
+  <Folder Name="/SolutionItems/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
+</Solution>
