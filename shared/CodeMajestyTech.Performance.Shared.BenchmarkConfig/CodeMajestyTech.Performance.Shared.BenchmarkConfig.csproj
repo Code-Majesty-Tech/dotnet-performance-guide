@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <RootNamespace>CodeMajestyTech.Performance.Shared.BenchmarkConfig</RootNamespace>
+        <AssemblyName>CodeMajestyTech.Performance.Shared.BenchmarkConfig</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BenchmarkDotNet" />
+    </ItemGroup>
+
+</Project>

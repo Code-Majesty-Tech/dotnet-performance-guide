@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <RootNamespace>CodeMajestyTech.Performance.Shared.TestContainers</RootNamespace>
+        <AssemblyName>CodeMajestyTech.Performance.Shared.TestContainers</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Testcontainers" />
+        <PackageReference Include="Testcontainers.PostgreSql" />
+        <PackageReference Include="Testcontainers.Redis" />
+        <PackageReference Include="Testcontainers.RabbitMq" />
+    </ItemGroup>
+
+</Project>
